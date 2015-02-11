@@ -1,0 +1,57 @@
+package main
+
+import "fmt"
+
+type Mycontact struct {
+	greeting string
+	name     string
+}
+
+func Mygreet(contact Mycontact, myWassa func(string)) {
+	myGreetingMas, myNameMas := CreateMessage(contact.name, contact.greeting, "howdy")
+}
+func Mycreatemessage(name string, greeting ...string) (myGreeting string, myName string) {
+	myGreeting = greeting[1] + " " + name
+	myName = "\nHey, " + name + "\n"
+	return
+}
+
+func myPrint(s string) {
+	fmt.Print(s)
+}
+
+func myPrintln(s string) {
+	fmt.Println(s)
+}
+
+func main() {
+
+	l := "This guy"
+	if l == "This guy" {
+		fmt.Println("Printing this thing")
+	} else {
+		fmt.Println("Not printing that thing")
+	}
+
+	m := "These People"
+	switch m {
+	case "These People":
+		fmt.Println("These are definitely people.")
+	case "Bob":
+		fmt.Println("Bob is getting printed")
+	case "Marcus":
+		fmt.Println(m + ", wonder why Marcus wasn't printed first")
+	case "Julia":
+		fmt.Println("Julia is a pretty good name")
+	default:
+		fmt.Println("No cases matched")
+	}
+	var t = Contact{"Yes hello,", "Marcus"}
+	Greet(t, myPrint)
+	u := Mycontact{"Guess what this is,", "Bob"}
+	Greet(u, myPrint)
+	v := Contact{}
+	v.greeting = "We're learning great things,"
+	v.name = "Todd"
+	Greet(v, myPrintln)
+}
