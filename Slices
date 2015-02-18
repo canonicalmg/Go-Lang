@@ -1,0 +1,15 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	mySlice := []int{1, 2, 3, 4, 5, 6}
+
+	fmt.Print("[1:2]")
+	fmt.Print(mySlice[1:2])
+
+	fmt.Print("[3:6]")
+	fmt.Print(mySlice[3:6])
+}
