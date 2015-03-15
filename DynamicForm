@@ -1,0 +1,57 @@
+package main
+
+import(
+	"log"
+	"os"
+	"text/template"
+)
+
+type Receiveobj struct{
+	Title, Name string
+	didDonate bool
+}
+
+type UpcomingEvents struct{
+	Events []string
+}
+
+func main() {
+	const letter =`Hello {{.Person.Title}} {{.Person.Name}}
+{{if .Person.didDonate}}
+We would like to thank you for your generous donation!
+{{else}}
+Please consider donating at the next available opporunity. This business won't run itself.
+{{end}}
+Make sure to check out our future venues:
+{{range .MoreInfo.Events}} {{.}}
+{{end}}
+`
+	receiveobjlist := []Receiveobj{
+		{"Mrs", "Parons", false},
+		{"Mr", "Ramirez", false},
+		{"Ms", "Graves", true},
+		{"Mr", "Norton", false},
+	}
+
+	upcomingEvents := UpcomingEvents{Events:[]string{
+		"Book signing event: Wednesday Jan 3rd",
+		"Web design award: Thursday Jan 4th",
+		"Form building club: Friday Jan 5th"}}
+
+
+	t := template.Must(template.New("letter").Parse(letter))
+
+	for _,r := range Recieveobj{
+		data := struct{
+			Person *Receiveobj
+			MoreInfo UpcomingEvents
+			}{
+			&r,
+			upcomingEvents,
+			}
+		err := t.Execute(os.Stdout, data)
+		if err != nil{
+			log.Println("executing template:", err)
+		}
+	}
+}
